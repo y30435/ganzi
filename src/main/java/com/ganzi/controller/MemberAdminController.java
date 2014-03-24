@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class MemberAdminController {
+public class MemberAdminController {	 
 	
 	/**
 	 * 로그인 페이지
