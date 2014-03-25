@@ -16,27 +16,6 @@
 
 	<mvc:annotation-driven/>
 	<context:component-scan base-package="com" />
-	<util:properties id="config" location="/WEB-INF/config/db.properties"/>
-	
-<!--  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
-<!--         <property name="driverClassName" value="#{config['master.jdbc.dirver']}"/> -->
-<!--         <property name="url" value="#{config['master.jdbc.url']}"/> -->
-<!--         <property name="username" value="#{config['master.jdbc.username']}"/> -->
-<!--         <property name="password" value="#{config['master.jdbc.password']}"/> -->
-<!--     </bean> -->
-	
-<!--  	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"> -->
-<!-- 		<property name="configLocation" value="/WEB-INF/config/ibatis-config.xml"/> -->
-<!-- 		<property name="mappingLocations" value="classpath:sql/*.xml"/> -->
-<!-- 		<property name="dataSource" ref="dataSource"/> -->
-<!-- 	</bean> -->
-	  
-<!-- 	<bean id="masterSqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate"> -->
-<!-- 		<property name="sqlMapClient" ref="sqlMapClient"/> -->
-<!-- 	</bean> -->
-	
-<!-- 	<tx:annotation-driven transaction-manager="transactionManager" /> -->
-<!-- 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/> -->
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -46,6 +25,27 @@
 	<!-- To prevent browser's back button on displaying secured resource after logout -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="cacheSeconds" value="0" />
+	</bean>
+
+	<!-- 1.  PropertyPlaceholderConfigurer .. property 파일 사용가능하게-->
+	<util:properties id="config" location="classpath:config/db.properties"/>
+	
+	<!-- 2. dataSource (mysql) -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{config['master.jdbc.dirver']}"/>
+		<property name="url" value="#{config['master.jdbc.url']}"/>
+		<property name="username" value="#{config['master.jdbc.username']}"/>
+		<property name="password" value="#{config['master.jdbc.password']}"/>
+	</bean>
+
+	<!-- 3. ibatis 관련 정보 --> 
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"   value="classpath:config/ibatis-config.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="SqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
 	</bean>
 
 </beans>

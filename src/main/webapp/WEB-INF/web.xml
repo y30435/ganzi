@@ -29,8 +29,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/config/spring-context.xml
-<!-- 			/WEB-INF/config/security-context.xml -->
+			classpath:/config/spring-context.xml
+			classpath:/config/security-context.xml
 		</param-value>
 	</context-param>
 
@@ -56,8 +56,8 @@
 <!-- 		<url-pattern>/*</url-pattern> -->
 <!-- 	</filter-mapping> -->
 
-	 	<servlet-mapping>
- 		<servlet-name>defaultDispatcher</servlet-name> 
- 		<url-pattern>*.do</url-pattern> 
-	 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>defaultDispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>
