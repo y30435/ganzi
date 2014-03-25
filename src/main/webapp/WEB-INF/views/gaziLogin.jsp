@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <%
 /**
  * JSP : 웹 브라우저에 회원 로그인 가능하도록 출력되는 화면
@@ -12,25 +12,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ganzi Project</title>
-<script language="javascript" src="../js/script.js" ></script>
+<script language="javascript" src="/ganzi/js/script.js" ></script>
+
 </head>
-<body onload='document.f.userid.focus();'>
-<form name='f' action="ganziList.jsp" method='POST'>
+<body>
+<form id='loginform' action="/list" method='POST'>
  		<table>
+ 		 	<tr>
+ 				<td align='center'><b>= login =</b></td>
+ 			</tr>
 			<tr>
-				<td>Username:</td>
-				<td><input type='text' size="20" name='userid' class="loginid"/>
-				</td>
+				<td>아이디:</td>
+				<td><input type='text' size="50" name='userid' class="loginid"/></td>
 			</tr>
 			<tr>
-				<td>Password:</td>
-				<td><input type='password' size="20" name='userpwd' class="loginpwd"/>
-				</td>
+				<td>비밀번호:</td>
+				<td><input type='password' size="50" name='userpwd' class="loginpwd"/></td>
 			</tr>
 			<tr>
-				<td colspan='5'><input type="button" value="login" name="javascript:document.f.loginChk();" /></td>
+				<td colspan='50'><input type="button" value="login" onclick="loginChk();" /></td>
+			</tr>
+			<tr>
+				<td colspan='50'><a href="<c:url value="/join.do" />"><input type="button" value="회원가입" /></a></td>
 			</tr>
 		</table>
- 	</form>
+ </form>
 </body>
 </html>
