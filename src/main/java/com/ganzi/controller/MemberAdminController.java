@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,7 +68,7 @@ public class MemberAdminController {
 	
 	
 	/**
-	 * 회원 정보 수정 페이지
+	 * 로그인 뷰 페이지
 	 * @author 
 	 * @when 
 	 */
@@ -76,6 +77,67 @@ public class MemberAdminController {
 
 		
 		return "gaziLogin"; 
+	}
+	
+	
+	/**
+	 * 회원 등록 뷰 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/join")
+	public String join(HttpServletRequest request, HttpServletResponse response) {
+		return "ganziJoin"; 
+	}
+	
+	
+	/**
+	 * 회원 정보 수정 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/update")
+	public ModelAndView update(@RequestParam("id") String userid) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		GanziUserDto data = null;
+		ModelAndView mav = new ModelAndView("mod");
+		try {			
+			ganziUserDto.setUserid(userid);
+			data = ganziUserService.getInfo(ganziUserDto);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		mav.setViewName("ganziUpdate");
+		mav.addObject("userid", data.getUserid());
+		mav.addObject("username", data.getUsername());
+		mav.addObject("userpwd", data.getUserpwd());
+		mav.addObject("userrole", data.getUserrole());
+		return mav;
+	}
+	
+	
+	/**
+	 * 회원 정보 상세 뷰 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/detail")
+	public ModelAndView detail(@RequestParam("id") String userid) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		GanziUserDto data = null;
+		ModelAndView mav = new ModelAndView("mod");
+		try {
+			ganziUserDto.setUserid(userid);
+			data = ganziUserService.getInfo(ganziUserDto);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		mav.setViewName("ganziDetail");
+		mav.addObject("userid", data.getUserid());
+		mav.addObject("username", data.getUsername());
+		mav.addObject("userpwd", data.getUserpwd());
+		mav.addObject("userrole", data.getUserrole());
+		return mav;
 	}
 	
 	
@@ -109,41 +171,6 @@ public class MemberAdminController {
 		return new ModelAndView(url);
 	}
 	
-	/**
-	 * 회원 정보 수정 페이지
-	 * @author 
-	 * @when 
-	 */
-	@RequestMapping("/update")
-	public String update(HttpServletRequest request, HttpServletResponse response) {
-
-		
-		return "ganziUpdate"; 
-	}
-	
-	
-	/**
-	 * 회원 등록 페이지
-	 * @author 
-	 * @when 
-	 */
-	@RequestMapping("/join")
-	public String join(HttpServletRequest request, HttpServletResponse response) {
-		return "ganziJoin"; 
-	}
-	
-	
-	/**
-	 * 회원 등록 페이지
-	 * @author 
-	 * @when 
-	 */
-	@RequestMapping("/detail")
-	public String detail(HttpServletRequest request, HttpServletResponse response) {
-		
-		
-		return "ganziDetail"; 
-	}
 	
 	/**
 	 * 회원 처리 페이지
@@ -169,8 +196,13 @@ public class MemberAdminController {
 			
 			if (type.equals("join"))
 				result = ganziUserService.join(ganziUserDto);
-		} catch(Exception e){
+			else if (type.equals("update"))
+				result = ganziUserService.update(ganziUserDto);
+			else if (type.equals("delete"))
+				result = ganziUserService.delete(ganziUserDto);
 			
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 		
 		return result; 

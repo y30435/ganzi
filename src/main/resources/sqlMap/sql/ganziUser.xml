@@ -12,6 +12,7 @@
 			,	userrole
 			,	username
 		FROM ganzi_user
+		ORDER BY userid asc
 	</select>
 	
 	<select id="login" parameterClass="GanziUserDto" resultClass="GanziUserDto">
