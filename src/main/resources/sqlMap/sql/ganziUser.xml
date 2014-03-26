@@ -15,7 +15,7 @@
 		ORDER BY userid asc
 	</select>
 	
-	<select id="login" parameterClass="GanziUserDto" resultClass="GanziUserDto">
+	<select id="getInfo" parameterClass="GanziUserDto" resultClass="GanziUserDto">
 		SELECT 
 				userid
 			,	userpwd
@@ -27,7 +27,16 @@
 	
 	<insert id="join" parameterClass="GanziUserDto">
 		INSERT INTO ganzi_user(userid, userpwd, userrole, username)
-		VALUES(#userid#, #userpwd#, #userrole#, username)
+		VALUES(#userid#, #userpwd#, #userrole#, #username#)
 	</insert>
+	
+	<update id="update" parameterClass="GanziUserDto">
+		UPDATE ganzi_user set userpwd = #userpwd#, userrole = #userrole#, username = #username#)
+		WHERE userid = #userid#
+	</update>
+	
+	<delete id="delete" parameterClass="GanziUserDto">
+		DELETE FROM ganzi_user WHERE userid = #userid#
+	</delete>
 	
 </sqlMap>
