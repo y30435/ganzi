@@ -1,14 +1,69 @@
 package com.ganzi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ganzi.dto.GanziUserDto;
+import com.ganzi.service.GanziUserService;
 
 @Controller
-@RequestMapping("/")
 public class MemberAdminController {
+	@Autowired
+	GanziUserService ganziUserService;
+	
+	
+	/**
+	 * 디비연결 테스
+	 * @author 
+	 * @throws Exception 
+	 * @when 
+	 */
+	@RequestMapping("/test")
+	public String test(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		List<GanziUserDto> data = null;
+		
+		try {
+			data = ganziUserService.getList(ganziUserDto);
+
+			request.setAttribute("data", data);
+		} catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return "list"; 
+	}
+	
+	
+	/**
+	 * 회원 정보 리스트 페이지
+	 * @author 
+	 * @throws Exception 
+	 * @when 
+	 */
+	@RequestMapping("/list")
+	public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		List<GanziUserDto> data = null;
+		
+		try {
+			data = ganziUserService.getList(ganziUserDto);
+
+			request.setAttribute("data", data);
+		} catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return "ganziList"; 
+	}
+	
 	
 	/**
 	 * 로그인 페이지
@@ -16,10 +71,25 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/login")
-	public String login(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		boolean result = false;
+		try {
+			String userid = request.getParameter("userid");
+			String userpwd = request.getParameter("userpwd");
+			
+			ganziUserDto.setUserid(userid);
+			ganziUserDto.setUserpwd(userpwd);
+			GanziUserDto aaa = ganziUserService.checkLogin(ganziUserDto);
+			if(aaa.getUserpwd() == userpwd){
+				result = true;
+			}
+		} catch(Exception e){
+			
+		}
 		
-		
-		return "gaziLogin"; 
+		return result; 
 	}
 	
 	/**
@@ -29,22 +99,9 @@ public class MemberAdminController {
 	 */
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, HttpServletResponse response) {
+
 		
-		
-		return "gaziUpdate"; 
-	}
-	
-	
-	/**
-	 * 회원 정보 리스트 페이지
-	 * @author 
-	 * @when 
-	 */
-	@RequestMapping("/list")
-	public String list(HttpServletRequest request, HttpServletResponse response) {
-		
-		
-		return "gaziList"; 
+		return "ganziUpdate"; 
 	}
 	
 	
@@ -57,7 +114,7 @@ public class MemberAdminController {
 	public String join(HttpServletRequest request, HttpServletResponse response) {
 		
 		
-		return "gaziJoin"; 
+		return "ganziJoin"; 
 	}
 	
 	
@@ -70,6 +127,6 @@ public class MemberAdminController {
 	public String detail(HttpServletRequest request, HttpServletResponse response) {
 		
 		
-		return "gaziDetail"; 
+		return "ganziDetail"; 
 	}
 }

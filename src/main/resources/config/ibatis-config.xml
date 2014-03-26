@@ -5,5 +5,5 @@
 
 <sqlMapConfig>    
     <settings useStatementNamespaces="true" />
-    <sqlMap resource="sqlMap/sql/dummy.xml"/>
+    <sqlMap resource="sqlMap/sql/ganziUser.xml"/>
 </sqlMapConfig>
