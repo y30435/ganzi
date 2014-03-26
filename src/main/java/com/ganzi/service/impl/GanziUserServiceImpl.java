@@ -24,8 +24,7 @@ public class GanziUserServiceImpl implements GanziUserService {
 	}
 
 	public GanziUserDto getInfo(GanziUserDto ganziUserDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return ganziUserDao.getInfo(ganziUserDto);
 	}
 
 	public boolean join(GanziUserDto ganziUserDto) throws Exception {
@@ -33,13 +32,11 @@ public class GanziUserServiceImpl implements GanziUserService {
 	}
 
 	public boolean update(GanziUserDto ganziUserDto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		return ganziUserDao.update(ganziUserDto);
 	}
 
 	public boolean delete(GanziUserDto ganziUserDto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		return ganziUserDao.delete(ganziUserDto);
 	}
 
 }
