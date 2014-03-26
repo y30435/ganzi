@@ -103,9 +103,9 @@ public class MemberAdminController {
 			
 		}
 		if (result){
-			url = "redirect:/list.do";
+			url = "redirect:/ganzi/list.do";
 		} else{
-			url = "redirect:/login.do";
+			url = "redirect:/ganzi/login.do";
 		}
 		return new ModelAndView(url);
 	}
