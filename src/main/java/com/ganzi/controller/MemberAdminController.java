@@ -66,13 +66,26 @@ public class MemberAdminController {
 	
 	
 	/**
-	 * 로그인 페이지
+	 * 회원 정보 수정 페이지
 	 * @author 
 	 * @when 
 	 */
 	@RequestMapping("/login")
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+
+		
+		return "ganziLogin"; 
+	}
+	
+	
+	/**
+	 * 로그인 처리 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/loginProc")
 	@ResponseBody
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean loginProc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
 		try {
@@ -112,8 +125,6 @@ public class MemberAdminController {
 	 */
 	@RequestMapping("/join")
 	public String join(HttpServletRequest request, HttpServletResponse response) {
-		
-		
 		return "ganziJoin"; 
 	}
 	
@@ -128,5 +139,34 @@ public class MemberAdminController {
 		
 		
 		return "ganziDetail"; 
+	}
+	
+	/**
+	 * 회원 처리 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/proc")
+	@ResponseBody
+	public boolean proc(HttpServletRequest request, HttpServletResponse response) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		boolean result = false;
+		try {
+			String type = request.getParameter("type");
+			String userid = request.getParameter("userid");
+			String userpwd = request.getParameter("userpwd");
+			String userrole = request.getParameter("userrole");
+			
+			ganziUserDto.setUserid(userid);
+			ganziUserDto.setUserpwd(userpwd);
+			ganziUserDto.setUserrole(userrole);
+			
+			if (type.equals("join"))
+				result = ganziUserService.join(ganziUserDto);
+		} catch(Exception e){
+			
+		}
+		
+		return result; 
 	}
 }
