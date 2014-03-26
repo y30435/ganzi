@@ -19,11 +19,7 @@
 			,	userpwd
 			,	userrole
 		FROM ganzi_user
-		<dynamic>
-			<isNotNull property="userid" prepend="AND">
-				userid = #userid#
-			</isNotNull>
-		</dynamic>
+		WHERE userid = #userid#
 	</select>
 	
 	<insert id="join" parameterClass="GanziUserDto">

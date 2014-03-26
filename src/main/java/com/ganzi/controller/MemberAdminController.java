@@ -94,18 +94,17 @@ public class MemberAdminController {
 			String userpwd = request.getParameter("userpwd");
 			
 			ganziUserDto.setUserid(userid);
-			ganziUserDto.setUserpwd(userpwd);
 			GanziUserDto aaa = ganziUserService.checkLogin(ganziUserDto);
-			if(aaa.getUserpwd() == userpwd){
+			if(aaa.getUserpwd().equals(userpwd)){
 				result = true;
 			}
 		} catch(Exception e){
-			
+			e.printStackTrace();
 		}
 		if (result){
-			url = "redirect:/ganzi/list.do";
+			url = "redirect:/list.do";
 		} else{
-			url = "redirect:/ganzi/login.do";
+			url = "redirect:/login.do";
 		}
 		return new ModelAndView(url);
 	}
