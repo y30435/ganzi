@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<form id='loginform' action="/list" method='POST'>
+<form id='loginform' action="/ganzi/loginProc.do" method='POST'>
  		<table>
  		 	<tr>
  				<td align='center'><b>= login =</b></td>
@@ -30,7 +30,7 @@
 				<td><input type='password' size="50" name='userpwd' class="loginpwd"/></td>
 			</tr>
 			<tr>
-				<td colspan='50'><input type="button" value="login" onclick="loginChk();" /></td>
+				<td colspan='50'><input type="button" value="login" onclick="loginChk();"/></td>
 			</tr>
 			<tr>
 				<td colspan='50'><a href="<c:url value="/join.do" />"><input type="button" value="회원가입" /></a></td>
