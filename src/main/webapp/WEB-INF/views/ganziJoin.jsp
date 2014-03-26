@@ -15,8 +15,8 @@
 <script language="javascript" src="/ganzi/js/script.js" ></script>
 
 </head>
-<body onload='document.joinform.username.focus();'>
-<form id='joinform' action="ganzi/list.do" method='POST'>
+<body onload='document.getElementsByName("username")[0].focus'>
+<form id='joinform' action="/ganzi/list.do" method='POST'>
  		<table>
  			<tr>
  				<td align='center'><b>= 회원가입 =</b></td>

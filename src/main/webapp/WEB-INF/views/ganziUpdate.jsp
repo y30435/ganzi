@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.ganzi.dto.GanziUserDto" %>
+
 <%
 /**
  * JSP : 웹 브라우저에 회원 상세정보를 수정 가능하도록 출력되는 화면
  * @author victoria
  */
- GanziUserDto testVO = (GanziUserDto) request.getAttribute("data");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,25 +26,25 @@
  			</tr>
  			<tr>
 				<td>이름:</td>
-				<td><input type='text' size="50" name='username' class="joinname" /><%=testVO.getUsername() %></td>
+				<td><input type='text' size="50" name='username' class="joinname" />${username}</td>
 			</tr>
 			<tr>
 				<td>아이디:</td>
-				<td><input type='text' size="50" name='userid' class="joinid"/><%=testVO.getUserid() %></td>
+				<td><input type='text' size="50" name='userid' class="joinid"/>${userid}</td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
-				<td><input type='password' size="50" name='userpwd' class="joinpwd1"/><%=testVO.getUserpwd() %></td>
+				<td><input type='password' size="50" name='userpwd' class="joinpwd1"/>${userpwd}</td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인:</td>
-				<td><input type='password' size="50" name='userpwd' class="joinpwd2"/></td>
+				<td><input type='password' size="50" name='userpwd' class="joinpwd2"/>${userpwd}</td>
 			</tr>
 			<tr>
 				<td colspan='50'><input type="button" value="수정확인" onclick="joinChk();" /></td>
 			</tr>
 			<tr>
-				<td colspan='50'><a href="<c:url value="/ganzi/login.do?id=<%=testVO.getUserid()%>" />"><input type="button" value="회원탈퇴" /></a></td>
+				<td colspan='50'><a href="<c:url value="/ganzi/login.do?id=${userid}" />"><input type="button" value="회원탈퇴" /></a></td>
 			</tr>
 		</table>
 </form>

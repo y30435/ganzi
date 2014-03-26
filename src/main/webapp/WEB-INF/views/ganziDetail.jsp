@@ -8,7 +8,6 @@
  * JSP : 웹 브라우저에 회원 상세정보가 출력되는 화면
  * @author victoria
  */
- GanziUserDto testVO = (GanziUserDto) request.getAttribute("data");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,12 +32,13 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td align="center"><%=testVO.getUserid() %></td>
-				<td align="center"><%=testVO.getUsername() %></td>
+				<td align="center">${userid}</td>
+				<td align="center">${username}</td>
 			</tr>
 		</tbody>
 	</table>
 			<tr>
-				<td colspan='50'><a href="<c:url value="/ganzi/update.do?id=<%=testVO.getUserid()%>" />"><input type="button" value="수정하기" /></a></td> 			</tr>
+				<td colspan='50'><a href="<c:url value="/ganzi/update.do?id=${userid}" />"><input type="button" value="수정하기" /></a></td> 		
+			</tr>
 </body>
 </html>
