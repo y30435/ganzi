@@ -160,10 +160,12 @@ public class MemberAdminController {
 			String userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
 			String userrole = request.getParameter("userrole");
+			String username = request.getParameter("username");
 			
 			ganziUserDto.setUserid(userid);
 			ganziUserDto.setUserpwd(userpwd);
 			ganziUserDto.setUserrole(userrole);
+			ganziUserDto.setUsername(username);
 			
 			if (type.equals("join"))
 				result = ganziUserService.join(ganziUserDto);

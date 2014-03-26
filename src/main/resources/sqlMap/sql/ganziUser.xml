@@ -10,6 +10,7 @@
 				userid
 			,	userpwd
 			,	userrole
+			,	username
 		FROM ganzi_user
 	</select>
 	
@@ -18,13 +19,14 @@
 				userid
 			,	userpwd
 			,	userrole
+			,	username
 		FROM ganzi_user
 		WHERE userid = #userid#
 	</select>
 	
 	<insert id="join" parameterClass="GanziUserDto">
-		INSERT INTO ganzi_user(userid, userpwd, userrole)
-		VALUES(#userid#, #userpwd#, #userrole#)
+		INSERT INTO ganzi_user(userid, userpwd, userrole, username)
+		VALUES(#userid#, #userpwd#, #userrole#, username)
 	</insert>
 	
 </sqlMap>
