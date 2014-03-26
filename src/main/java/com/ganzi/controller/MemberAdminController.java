@@ -74,7 +74,7 @@ public class MemberAdminController {
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 
 		
-		return "ganziLogin"; 
+		return "gaziLogin"; 
 	}
 	
 	
