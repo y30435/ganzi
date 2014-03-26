@@ -26,4 +26,9 @@
 		</dynamic>
 	</select>
 	
+	<insert id="join" parameterClass="GanziUserDto">
+		INSERT INTO ganzi_user(userid, userpwd, userrole)
+		VALUES(#userid#, #userpwd#, #userrole#)
+	</insert>
+	
 </sqlMap>

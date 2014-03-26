@@ -28,9 +28,8 @@ public class GanziUserServiceImpl implements GanziUserService {
 		return null;
 	}
 
-	public boolean insert(GanziUserDto ganziUserDto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean join(GanziUserDto ganziUserDto) throws Exception {
+		return ganziUserDao.join(ganziUserDto);
 	}
 
 	public boolean update(GanziUserDto ganziUserDto) throws Exception {

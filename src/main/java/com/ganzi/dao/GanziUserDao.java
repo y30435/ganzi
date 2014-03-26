@@ -18,4 +18,8 @@ public class GanziUserDao extends BaseSqlMapDao{
 		
 		return (List<GanziUserDto>) super.list("ganziUser.list", ganziUserDto);
 	}
+	
+	public boolean join(GanziUserDto ganziUserDto) {
+		return super.insert("ganziUser.join",ganziUserDto);
+	}
 }
