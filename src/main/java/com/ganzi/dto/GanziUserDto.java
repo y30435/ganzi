@@ -4,6 +4,7 @@ public class GanziUserDto {
 	private String userid;
 	private String userpwd;
 	private String userrole;
+	private String username;
 
 	public String getUserid() {
 		return userid;
@@ -27,6 +28,14 @@ public class GanziUserDto {
 
 	public void setUserrole(String userrole) {
 		this.userrole = userrole;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
