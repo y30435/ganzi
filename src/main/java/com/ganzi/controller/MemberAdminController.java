@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ganzi.dto.GanziUserDto;
 import com.ganzi.service.GanziUserService;
@@ -84,9 +85,9 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/loginProc")
-	@ResponseBody
-	public boolean loginProc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView loginProc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
+		String url;
 		boolean result = false;
 		try {
 			String userid = request.getParameter("userid");
@@ -101,8 +102,12 @@ public class MemberAdminController {
 		} catch(Exception e){
 			
 		}
-		
-		return result; 
+		if (result){
+			url = "redirect:/list.do";
+		} else{
+			url = "redirect:/login.do";
+		}
+		return new ModelAndView(url);
 	}
 	
 	/**
