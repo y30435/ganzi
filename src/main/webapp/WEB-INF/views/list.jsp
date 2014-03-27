@@ -15,7 +15,6 @@
 <tr>
 	<th>아이디</th>
 </tr>
-
 <%
 	if(null != data) {
 		int dataSize = data.size();
