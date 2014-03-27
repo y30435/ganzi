@@ -183,7 +183,7 @@ public class MemberAdminController {
 		try {
 			String userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
-			String userrole = "User";
+			String userrole = "ROLE_USER";
 			String username = request.getParameter("username");
 			
 			ganziUserDto.setUserid(userid);
