@@ -181,9 +181,8 @@ public class MemberAdminController {
 	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
-		String userid = "";
 		try {
-			userid = request.getParameter("userid");
+			String userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
 			String userrole = request.getParameter("userrole");
 			String username = request.getParameter("username");
@@ -199,7 +198,7 @@ public class MemberAdminController {
 			e.printStackTrace();
 		}
 		
-		String url = "redirect:/update.do?id="+userid;
+		String url = "redirect:/join.do";
 		if (result){
 			url = "redirect:/list.do";
 		} 
