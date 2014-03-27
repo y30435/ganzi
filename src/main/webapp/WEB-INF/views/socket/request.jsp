@@ -5,21 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/ganzi/css/ganzi.css" />
-<style type="text/css">
-.item {
-	border-width: 2px;
-	border-color: #1E90FF;
-	border-style: solid;
-	padding-left: 5px;
-	padding-top: 10px;
-	padding-right: 10px;
-	padding-bottom: 10px;
-	margin-top : 10px;
-	margin-left: 10px;
-	width:95%;
-}
-
-
 </style>
 <title>네이버 검색 오픈 API 접속</title>
 </head>

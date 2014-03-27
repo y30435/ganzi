@@ -69,11 +69,11 @@ public class XpathService {
 			for(int $i=0; $i<itemList.getLength(); $i++) {
 				NodeList itemChild = itemList.item($i).getChildNodes();
 				
-				strRslt += "<div id='item'>";
+				strRslt += "<div class='item'>";
 				for(int $j=0; $j<itemChild.getLength(); $j++) {
-					strRslt += "<span id='element'>";
-					strRslt += "<span id='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
-					strRslt += "<span id='el_text'>"+ itemChild.item($j).getTextContent() + "</span>";
+					strRslt += "<span class='element'>";
+					strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
+					strRslt += "<span class='el_text'>"+ itemChild.item($j).getTextContent() + "</span>";
 					strRslt += "</span>";
 				}
 				strRslt += "</div>";
