@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 /**
  * JSP : 웹 브라우저에 회원 로그인 가능하도록 출력되는 화면
@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<form id='loginform' action="/ganzi/loginProc.do" method='POST'>
+<form id='loginform' action="/list" method='POST'>
  		<table>
  		 	<tr>
  				<td align='center'><b>= login =</b></td>
@@ -30,7 +30,7 @@
 				<td><input type='password' size="50" name='userpwd' class="loginpwd"/></td>
 			</tr>
 			<tr>
-				<td colspan='50'><input type="button" value="login" onclick="loginChk();"/></td>
+				<td colspan='50'><input type="button" value="login" onclick="loginChk();" /></td>
 			</tr>
 			<tr>
 				<td colspan='50'><a href="<c:url value="/join.do" />"><input type="button" value="회원가입" /></a></td>

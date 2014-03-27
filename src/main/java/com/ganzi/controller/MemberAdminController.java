@@ -178,13 +178,13 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/proc")
-	@ResponseBody
-	public boolean proc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
+		String userid = "";
 		try {
 			String type = request.getParameter("type");
-			String userid = request.getParameter("userid");
+			userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
 			String userrole = request.getParameter("userrole");
 			String username = request.getParameter("username");
@@ -205,6 +205,11 @@ public class MemberAdminController {
 			e.printStackTrace();
 		}
 		
-		return result; 
+		String url = "redirect:/update.do?id="+userid;
+		if (result){
+			url = "redirect:/list.do";
+		} 
+		
+		return new ModelAndView(url);
 	}
 }

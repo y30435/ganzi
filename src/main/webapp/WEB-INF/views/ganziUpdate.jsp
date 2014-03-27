@@ -19,32 +19,33 @@
 
 </head>
 <body>
-<form id='joinform' action="/ganzi/loginProc.do" method='POST'>
+<form id='joinform' action="/ganzi/proc.do" method='POST'>
+<input type="hidden" name="type" value="update">
  		<table>
  			<tr>
  				<td align='center'><b>= 회원정보 수정 =</b></td>
  			</tr>
  			<tr>
 				<td>이름:</td>
-				<td><input type='text' size="50" name='username' class="joinname" />${username}</td>
+				<td><input type='text' size="50" name='username' class="joinname" value="${username}"/></td>
 			</tr>
 			<tr>
 				<td>아이디:</td>
-				<td><input type='text' size="50" name='userid' class="joinid"/>${userid}</td>
+				<td><input type='text' size="50" name='userid' class="joinid" value="${userid}"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
-				<td><input type='password' size="50" name='userpwd' class="joinpwd1"/>${userpwd}</td>
+				<td><input type='password' size="50" name='userpwd' class="joinpwd1" value="${userpwd}"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인:</td>
-				<td><input type='password' size="50" name='userpwd' class="joinpwd2"/>${userpwd}</td>
+				<td><input type='password' size="50" name='userpwd' class="joinpwd2" value="${userpwd}"/></td>
 			</tr>
 			<tr>
 				<td colspan='50'><input type="button" value="수정확인" onclick="joinChk();" /></td>
 			</tr>
 			<tr>
-				<td colspan='50'><a href="<c:url value="/ganzi/login.do?id=${userid}" />"><input type="button" value="회원탈퇴" /></a></td>
+				<td colspan='50'><a href="<c:url value="/login.do?id=${userid}" />"><input type="button" value="회원탈퇴" /></a></td>
 			</tr>
 		</table>
 </form>

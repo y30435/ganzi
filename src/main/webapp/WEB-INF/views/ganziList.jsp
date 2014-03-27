@@ -43,7 +43,7 @@
 			%>
 			<tr>
 				<td align="center"><%=i%></td>
-				<td align="center"><a href="<c:url value="/ganzi/detail.do?id=<%=testVO.getUserid()%>" />"><%=testVO.getUserid() %></a></td>
+				<td align="center"><a href="<c:url value="/detail.do?id=" /><%=testVO.getUserid() %>"><%=testVO.getUserid() %></a></td>
 			</tr>
 			<%
 						}
