@@ -173,17 +173,16 @@ public class MemberAdminController {
 	
 	
 	/**
-	 * 회원 처리 페이지
+	 * 회원 등록 처리 페이지
 	 * @author 
 	 * @when 
 	 */
-	@RequestMapping("/proc")
+	@RequestMapping("/joinProc")
 	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
 		String userid = "";
 		try {
-			String type = request.getParameter("type");
 			userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
 			String userrole = request.getParameter("userrole");
@@ -194,12 +193,69 @@ public class MemberAdminController {
 			ganziUserDto.setUserrole(userrole);
 			ganziUserDto.setUsername(username);
 			
-			if (type.equals("join"))
-				result = ganziUserService.join(ganziUserDto);
-			else if (type.equals("update"))
-				result = ganziUserService.update(ganziUserDto);
-			else if (type.equals("delete"))
-				result = ganziUserService.delete(ganziUserDto);
+			result = ganziUserService.join(ganziUserDto);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		String url = "redirect:/update.do?id="+userid;
+		if (result){
+			url = "redirect:/list.do";
+		} 
+		
+		return new ModelAndView(url);
+	}
+	
+	/**
+	 * 회원 수정 처리 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/updateProc")
+	public ModelAndView updateProc(HttpServletRequest request, HttpServletResponse response) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		boolean result = false;
+		String userid = "";
+		try {
+			userid = request.getParameter("userid");
+			String userpwd = request.getParameter("userpwd");
+			String userrole = request.getParameter("userrole");
+			String username = request.getParameter("username");
+			
+			ganziUserDto.setUserid(userid);
+			ganziUserDto.setUserpwd(userpwd);
+			ganziUserDto.setUserrole(userrole);
+			ganziUserDto.setUsername(username);
+			
+			result = ganziUserService.update(ganziUserDto);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		String url = "redirect:/update.do?id="+userid;
+		if (result){
+			url = "redirect:/list.do";
+		} 
+		
+		return new ModelAndView(url);
+	}
+	
+	/**
+	 * 회원 삭제 처리 페이지
+	 * @author 
+	 * @when 
+	 */
+	@RequestMapping("/deleteProc")
+	public ModelAndView deleteProc(HttpServletRequest request, HttpServletResponse response) {
+		GanziUserDto ganziUserDto = new GanziUserDto();
+		boolean result = false;
+		String userid = "";
+		try {
+			userid = request.getParameter("userid");
+			ganziUserDto.setUserid(userid);
+			result = ganziUserService.delete(ganziUserDto);
 			
 		} catch(Exception e){
 			e.printStackTrace();
