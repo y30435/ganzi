@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ganzi.dto.GanziUserDto;
@@ -76,7 +75,7 @@ public class MemberAdminController {
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 
 		
-		return "ganziLogin"; 
+		return "gaziLogin"; 
 	}
 	
 	
@@ -184,7 +183,7 @@ public class MemberAdminController {
 		try {
 			String userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
-			String userrole = request.getParameter("userrole");
+			String userrole = "User";
 			String username = request.getParameter("username");
 			
 			ganziUserDto.setUserid(userid);
