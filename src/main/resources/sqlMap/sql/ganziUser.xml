@@ -31,7 +31,7 @@
 	</insert>
 	
 	<update id="update" parameterClass="GanziUserDto">
-		UPDATE ganzi_user set userpwd = #userpwd#, userrole = #userrole#
+		UPDATE ganzi_user set userpwd = #userpwd#, userrole = #userrole#, username = #username#
 		WHERE userid = #userid#
 	</update>
 	
