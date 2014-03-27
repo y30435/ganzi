@@ -244,12 +244,10 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/deleteProc")
-	public ModelAndView deleteProc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView deleteProc(@RequestParam("id") String userid) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
-		String userid = "";
 		try {
-			userid = request.getParameter("userid");
 			ganziUserDto.setUserid(userid);
 			result = ganziUserService.delete(ganziUserDto);
 			
