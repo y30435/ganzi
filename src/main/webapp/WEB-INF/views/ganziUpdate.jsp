@@ -19,7 +19,7 @@
 
 </head>
 <body>
-<form id='joinform' action="/ganzi/proc.do" method='POST'>
+<form id='updateform' action="/ganzi/proc.do" method='POST'>
 <input type="hidden" name="type" value="update">
  		<table>
  			<tr>
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>아이디:</td>
-				<td><input type='text' size="50" name='userid' class="joinid" value="${userid}"/></td>
+				<td><input type='text' size="50" name='userid' class="joinid" value="${userid}" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
@@ -42,11 +42,15 @@
 				<td><input type='password' size="50" name='userpwd' class="joinpwd2" value="${userpwd}"/></td>
 			</tr>
 			<tr>
-				<td colspan='50'><input type="button" value="수정확인" onclick="joinChk();" /></td>
+				<td>권한 설정:</td>
+			<td><input type='text' size="50" name='userrole' class="userrole" value="${userrole}"/></td>
+			</tr>
+			<tr>
+				<td colspan='50'><input type="button" value="수정확인" onclick="updateChk();" /></td>
 			</tr>
 			<tr>
 				<td colspan='50'><a href="<c:url value="/login.do?id=${userid}" />"><input type="button" value="회원탈퇴" /></a></td>
-			</tr>
+			</tr>    
 		</table>
 </form>
 </body>

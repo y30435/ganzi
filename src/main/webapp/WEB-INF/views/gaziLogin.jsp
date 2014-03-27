@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 /**
  * JSP : 웹 브라우저에 회원 로그인 가능하도록 출력되는 화면
@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<form id='loginform' action="/list" method='POST'>
+<form id='loginform' action="/ganzi/list.do" method='POST'>
  		<table>
  		 	<tr>
  				<td align='center'><b>= login =</b></td>

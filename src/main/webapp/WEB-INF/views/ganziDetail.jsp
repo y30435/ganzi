@@ -39,6 +39,6 @@
 	</table>
 			<tr>
 				<td colspan='50'><a href="<c:url value="/update.do?id=${userid}" />"><input type="button" value="수정하기" /></a></td> 		
-			</tr>
+			</tr>     
 </body>
 </html>
