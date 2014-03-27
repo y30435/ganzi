@@ -259,7 +259,7 @@ public class MemberAdminController {
 		
 		String url = "redirect:/update.do?id="+userid;
 		if (result){
-			url = "redirect:/list.do";
+			url = "redirect:/logout.do";
 		} 
 		
 		return new ModelAndView(url);
