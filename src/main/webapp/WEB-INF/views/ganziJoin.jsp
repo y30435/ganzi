@@ -16,7 +16,7 @@
 
 </head>
 <body onload='document.getElementsByName("username")[0].focus'>
-<form id='joinform' action="/ganzi/list.do" method='POST'>
+<form id='joinform' action="/ganzi/joinProc.do" method='POST'>
  		<table>
  			<tr>
  				<td align='center'><b>= 회원가입 =</b></td>
