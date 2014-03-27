@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of git@github.com:y30435/ganzi.git
 <%
 /**
  * JSP : 웹 브라우저에 회원 로그인 가능하도록 출력되는 화면
