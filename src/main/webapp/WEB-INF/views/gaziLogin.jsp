@@ -16,18 +16,18 @@
 
 </head>
 <body>
-<form id='loginform' action="/ganzi/list.do" method='POST'>
+<form id='loginform' action="/ganzi/j_spring_security_check" method='POST'>
  		<table>
  		 	<tr>
  				<td align='center'><b>= login =</b></td>
  			</tr>
 			<tr>
 				<td>아이디:</td>
-				<td><input type='text' size="50" name='userid' class="loginid"/></td>
+				<td><input type='text' size="50" name='j_username' class="loginid"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
-				<td><input type='password' size="50" name='userpwd' class="loginpwd"/></td>
+				<td><input type='password' size="50" name='j_password' class="loginpwd"/></td>
 			</tr>
 			<tr>
 				<td colspan='50'><input type="button" value="login" onclick="loginChk();" /></td>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.ganzi.dto.GanziUserDto" %>
 <%
@@ -15,7 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Ganzi Project</title>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
-
+<security:authentication property="authorities" var="usr_authority"></security:authentication>
 </head>
 <body>
 <table border="1" summary="회원 상세정보">
@@ -37,8 +38,10 @@
 			</tr>
 		</tbody>
 	</table>
+	<c:if test="${usr_authority == '[ROLE_ADMIN]'}">
 			<tr>
 				<td colspan='50'><a href="<c:url value="/update.do?id=${userid}" />"><input type="button" value="수정하기" /></a></td> 		
-			</tr>     
+			</tr>
+	</c:if>     
 </body>
 </html>
