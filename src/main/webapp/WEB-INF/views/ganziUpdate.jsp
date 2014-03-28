@@ -16,10 +16,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Ganzi Project</title>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
-
+<script language="javascript" src="/ganzi/js/jquery-1.11.0.js" ></script>
+<script>
+$(document).ready(function(){
+	if($(".userrole").val() == "ROLE_ADMIN"){
+		$("#slt option:eq(1)").attr("selected","selected");
+	}
+});
+</script>
 </head>
 <body>
 <form id='updateform' action="/ganzi/updateProc.do" method='POST'>
+<input type='hidden' class="userrole" value="${userrole}"/>
  		<table>
  			<tr>
  				<td align='center'><b>= 회원정보 수정 =</b></td>
@@ -42,7 +50,16 @@
 			</tr>
 			<tr>
 				<td>권한 설정:</td>
-			<td><input type='text' size="50" name='userrole' class="userrole" value="${userrole}"/></td>
+			<!-- <td><input type='text' size="50" name='userrole' class="userrole" value="${userrole}"/></td> -->
+				<td>
+					<select name='userrole' id="slt">
+						<option value="ROLE_USER">일반 사용자</option>
+						<option value="ROLE_ADMIN">시스템 관리자</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+
 			</tr>
 			<tr>
 				<td colspan='50'><input type="button" value="수정확인" onclick="updateChk();" /></td>

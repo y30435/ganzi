@@ -4,7 +4,7 @@
 var regx_id =/^[a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(?:\.[a-zA-Z]{2})?$/;   
 var regx_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}$/;
 var regx_name = /^[가-힣a-zA-Z]+$/;
-var regx = /^[a-zA-Z]{4}+\_[a-zA-Z]$/;
+/* var regx = /^[a-zA-Z]{4}+\_[a-zA-Z]$/;*/
 
 function loginChk(){
 	
@@ -125,7 +125,7 @@ function updateChk(){
 	var id = document.getElementsByName("userid")[0].value;
 	var pwd = document.getElementsByName("userpwd")[0].value; 
 	var pwd2 = document.getElementsByName("userpwd")[1].value;
-	var role = document.getElementsByName("userrole")[0].value;
+	/* var role = document.getElementsByName("userrole")[0].value; */
 	
 	/* 
 	 * 이름은 한글/영문만 입력
@@ -186,10 +186,6 @@ function updateChk(){
 	/* 
 	 * 권한은 영문만 입력
 	 */
-	if((role.length) == 0 || (role == null)){
-		alert("권한을 부여하세요.");
-		document.getElementsByName("userrole")[0].focus();
-		return false;
-	}
+
 	document.getElementById("updateform").submit();
 }
