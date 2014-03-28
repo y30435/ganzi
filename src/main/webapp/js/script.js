@@ -8,21 +8,21 @@ var regx = /^[a-zA-Z]{4}+\_[a-zA-Z]$/;
 
 function loginChk(){
 	
-	var id = document.getElementsByName("userid")[0].value;
-	var pwd = document.getElementsByName("userpwd")[0].value; 
+	var id = document.getElementsByName("j_username")[0].value;
+	var pwd = document.getElementsByName("j_password")[0].value; 
 
 	/* 
 	 * 아이디는 이메일 형식만 입력 
 	 */
 	if((id.length) == 0 || (id == null)){
 		alert("아이디를 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
+		document.getElementsByName("j_username")[0].value="";
+		document.getElementsByName("j_username")[0].focus();
 		return false;
 	}else if(!regx_id.test(id)){
 		alert("아이디는 이메일 형식으로 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
+		document.getElementsByName("j_username")[0].value="";
+		document.getElementsByName("j_username")[0].focus();
 		return false;
 	}
 	
@@ -32,18 +32,18 @@ function loginChk(){
 	 */
 	if((pwd.length) == 0 || (pwd == null)){
 		alert("비밀번호를 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[0].focus();
+		document.getElementsByName("j_password")[0].value="";
+		document.getElementsByName("j_password")[0].focus();
 		return false;
 	}else if((pwd.length) < 6 || (pwd.length) > 12){
 		alert("비밀번호는 6 ~ 12자리로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[0].focus();
+		document.getElementsByName("j_password")[0].value="";
+		document.getElementsByName("j_password")[0].focus();
 		return false;
 	}else if(!regx_pwd.test(pwd)){
 		alert("비밀번호는 문자,숫자,특수문자의 조합으로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[0].focus();
+		document.getElementsByName("j_password")[0].value="";
+		document.getElementsByName("j_password")[0].focus();
 		return false;
 	}
 	document.getElementById("loginform").submit();

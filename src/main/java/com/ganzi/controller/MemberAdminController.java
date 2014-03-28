@@ -224,7 +224,7 @@ public class MemberAdminController {
 			ganziUserDto.setUserid(userid);
 			ganziUserDto.setUserpwd(userpwd);
 			ganziUserDto.setUserrole(userrole);
-			ganziUserDto.setUserrole(username);
+			ganziUserDto.setUsername(username);
 			
 			result = ganziUserService.update(ganziUserDto);
 			

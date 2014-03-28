@@ -47,9 +47,11 @@
 			<tr>
 				<td colspan='50'><input type="button" value="수정확인" onclick="updateChk();" /></td>
 			</tr>
+			<c:if test="${userid} != 'ganzi@wemakeprice.com'">
 			<tr>
 				<td colspan='50'><a href="<c:url value="/deleteProc.do?id=${userid}" />"><input type="button" value="회원탈퇴" /></a></td>
-			</tr>    
+			</tr>
+			</c:if>
 		</table>
 </form>
 </body>
