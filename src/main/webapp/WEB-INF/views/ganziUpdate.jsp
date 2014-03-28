@@ -19,8 +19,7 @@
 
 </head>
 <body>
-<form id='updateform' action="/ganzi/proc.do" method='POST'>
-<input type="hidden" name="type" value="update">
+<form id='updateform' action="/ganzi/updateProc.do" method='POST'>
  		<table>
  			<tr>
  				<td align='center'><b>= 회원정보 수정 =</b></td>
