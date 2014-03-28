@@ -9,7 +9,6 @@
  * JSP : 웹 브라우저에 등록된 회원 리스트가 출력되는 화면
  * @author victoria
  */
- List<GanziUserDto> newList = (List<GanziUserDto>) request.getAttribute("data");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,24 +32,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				if(null != newList) {
-					int newListSize = newList.size();
-					
-					if(newListSize > 0) {
-						for(int i = 0; newListSize > i; i++ ) {
-							GanziUserDto testVO = newList.get(i);
-			%>
-			<tr>
-				<td align="center"><%=i%></td>
-				<td align="center"><a href="<c:url value="/detail.do?id=" /><%=testVO.getUserid() %>"><%=testVO.getUserid() %></a></td>
-			</tr>
-			<%
-						}
-					}
-				}else{
-				}
-			%>	
+			<c:forEach items="${data}" var="list" varStatus="status">
+				<tr>
+					<td align="center"><c:out value="${status.count}"></c:out></td>
+					<td align="center"><a href="<c:url value="/detail.do?id=${list.userid}" />"><c:out value="${list.userid}" /></a></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 
