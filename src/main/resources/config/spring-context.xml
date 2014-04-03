@@ -17,34 +17,50 @@
 	<mvc:annotation-driven/>
 	<context:component-scan base-package="com.ganzi" />
 	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean> -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/"
+		p:suffix=".jsp"/>
 	
 	<!-- To prevent browser's back button on displaying secured resource after logout -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="cacheSeconds" value="0" />
-	</bean>
+	</bean> -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"
+		p:cacheSeconds="0"/>
 
 	<!-- 1.  PropertyPlaceholderConfigurer .. property 파일 사용가능하게-->
 	<util:properties id="config" location="classpath:config/db.properties"/>
 	
 	<!-- 2. dataSource (mysql) -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="#{config['master.jdbc.dirver']}"/>
 		<property name="url" value="#{config['master.jdbc.url']}"/>
 		<property name="username" value="#{config['master.jdbc.username']}"/>
 		<property name="password" value="#{config['master.jdbc.password']}"/>
-	</bean>
+	</bean> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+		p:driverClassName="#{config['master.jdbc.dirver']}"
+		p:url="#{config['master.jdbc.url']}"
+		p:username="#{config['master.jdbc.username']}"
+		p:password="#{config['master.jdbc.password']}" />
 
 	<!-- 3. ibatis 관련 정보 --> 
-	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	<!-- <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation"   value="classpath:config/ibatis-config.xml"/>
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
 	<bean id="SqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<property name="sqlMapClient" ref="sqlMapClient"/>
-	</bean>
+	</bean> -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+		p:configLocation="classpath:config/ibatis-config.xml"
+		p:dataSource-ref="dataSource"/>
+	<bean id="SqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate"
+		p:sqlMapClient-ref="sqlMapClient"/>
+	
+	
 </beans>

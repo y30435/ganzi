@@ -38,10 +38,10 @@
 			</tr>
 		</tbody>
 	</table>
-	<c:if test="${usr_authority == '[ROLE_ADMIN]'}">
+	<security:authorize ifAnyGranted="ROLE_ADMIN">
 			<tr>
 				<td colspan='50'><a href="<c:url value="/update.do?id=${userid}" />"><input type="button" value="수정하기" /></a></td> 		
 			</tr>
-	</c:if>     
+	</security:authorize>
 </body>
 </html>

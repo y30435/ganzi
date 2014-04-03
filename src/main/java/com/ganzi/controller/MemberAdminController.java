@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,6 +96,7 @@ public class MemberAdminController {
 	 * @author 
 	 * @when 
 	 */
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update")
 	public ModelAndView update(@RequestParam("id") String userid) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
@@ -210,8 +212,10 @@ public class MemberAdminController {
 	 * @author 
 	 * @when 
 	 */
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/updateProc")
-	public ModelAndView updateProc(HttpServletRequest request, HttpServletResponse response) {
+//	public ModelAndView updateProc( Article article) {
+	public ModelAndView updateProc( HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		boolean result = false;
 		String userid = "";
@@ -226,6 +230,7 @@ public class MemberAdminController {
 			ganziUserDto.setUserrole(userrole);
 			ganziUserDto.setUsername(username);
 			
+			//result = ganziUserService.update(article);
 			result = ganziUserService.update(ganziUserDto);
 			
 		} catch(Exception e){
@@ -245,6 +250,7 @@ public class MemberAdminController {
 	 * @author 
 	 * @when 
 	 */
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/deleteProc")
 	public ModelAndView deleteProc(@RequestParam("id") String userid) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
