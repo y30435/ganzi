@@ -27,15 +27,15 @@ public class GanziUserServiceImpl implements GanziUserService {
 		return ganziUserDao.getInfo(ganziUserDto);
 	}
 
-	public boolean join(GanziUserDto ganziUserDto) throws Exception {
+	public int join(GanziUserDto ganziUserDto) throws Exception {
 		return ganziUserDao.join(ganziUserDto);
 	}
 
-	public boolean update(GanziUserDto ganziUserDto) throws Exception {
+	public int update(GanziUserDto ganziUserDto) throws Exception {
 		return ganziUserDao.update(ganziUserDto);
 	}
 
-	public boolean delete(GanziUserDto ganziUserDto) throws Exception {
+	public int delete(GanziUserDto ganziUserDto) throws Exception {
 		return ganziUserDao.delete(ganziUserDto);
 	}
 

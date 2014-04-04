@@ -181,7 +181,7 @@ public class MemberAdminController {
 	@RequestMapping("/joinProc")
 	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
-		boolean result = false;
+		int result = 0;
 		try {
 			String userid = request.getParameter("userid");
 			String userpwd = request.getParameter("userpwd");
@@ -200,7 +200,7 @@ public class MemberAdminController {
 		}
 		
 		String url = "redirect:/join.do";
-		if (result){
+		if (result == 1){
 			url = "redirect:/list.do";
 		} 
 		
@@ -217,7 +217,7 @@ public class MemberAdminController {
 //	public ModelAndView updateProc( Article article) {
 	public ModelAndView updateProc( HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
-		boolean result = false;
+		int result = 0;
 		String userid = "";
 		try {
 			userid = request.getParameter("userid");
@@ -238,7 +238,7 @@ public class MemberAdminController {
 		}
 		
 		String url = "redirect:/update.do?id="+userid;
-		if (result){
+		if (result == 1){
 			url = "redirect:/list.do";
 		} 
 		
@@ -254,7 +254,7 @@ public class MemberAdminController {
 	@RequestMapping("/deleteProc")
 	public ModelAndView deleteProc(@RequestParam("id") String userid) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
-		boolean result = false;
+		int result = 0;
 		try {
 			ganziUserDto.setUserid(userid);
 			result = ganziUserService.delete(ganziUserDto);
@@ -264,7 +264,7 @@ public class MemberAdminController {
 		}
 		
 		String url = "redirect:/update.do?id="+userid;
-		if (result){
+		if (result == 1){
 			url = "redirect:/logout.do";
 		} 
 		

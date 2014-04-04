@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ganziUser">
+	<select id="list" parameterType="GanziUserDto" resultType="GanziUserDto">
+		SELECT 
+				userid
+			,	userpwd
+			,	userrole
+			,	username
+		FROM ganzi_user
+		ORDER BY userid asc
+	</select>
+	
+	<select id="getInfo" parameterType="GanziUserDto" resultType="GanziUserDto">
+		SELECT 
+				userid
+			,	userpwd
+			,	userrole
+			,	username
+		FROM ganzi_user
+		WHERE userid = #{userid}
+	</select>
+	
+	<update id="join" parameterType="GanziUserDto">
+		INSERT INTO ganzi_user(userid, userpwd, userrole, username)
+		VALUES(#{userid}, #{userpwd}, #{userrole}, #{username})
+	</update>
+	
+	<update id="update" parameterType="GanziUserDto">
+		UPDATE ganzi_user set userpwd = #{userpwd}, userrole = #{userrole}, username = #{username}
+		WHERE userid = #{userid}
+	</update>
+	
+	<delete id="delete" parameterType="GanziUserDto">
+		DELETE FROM ganzi_user WHERE userid = #{userid}
+	</delete>
+	
+</mapper>

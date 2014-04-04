@@ -12,9 +12,9 @@ public interface GanziUserService {
 	
 	public GanziUserDto getInfo(GanziUserDto ganziUserDto) throws Exception;
 	
-	public boolean join(GanziUserDto ganziUserDto) throws Exception;
+	public int join(GanziUserDto ganziUserDto) throws Exception;
 	
-	public boolean update(GanziUserDto ganziUserDto) throws Exception;
+	public int update(GanziUserDto ganziUserDto) throws Exception;
 	
-	public boolean delete(GanziUserDto ganziUserDto) throws Exception;
+	public int delete(GanziUserDto ganziUserDto) throws Exception;
 }
