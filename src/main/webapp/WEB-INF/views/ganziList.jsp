@@ -15,11 +15,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Ganzi Project</title>
+<script language="javascript" src="/ganzi/js/jquery-1.11.0.js" ></script>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
 
 </head>
 <body>
 <table border="1" summary="회원 전체목록">
+		<div><a href="<c:url value="/logout.do" />">로그아웃</a></div>
 		<caption> = 회원정보 = </caption>
 		<colgroup>
 			<col width="100" />
@@ -28,7 +30,7 @@
 		<thead>
 			<tr>
 				<th>NO.</th>
-				<th>아이디</th>
+				<th>ID(email)</th>
 			</tr>
 		</thead>
 		<tbody>
