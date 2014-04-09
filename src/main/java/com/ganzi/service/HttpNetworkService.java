@@ -109,6 +109,7 @@ public class HttpNetworkService {
         String strBuffer = "";
         String strRslt   = "";
         
+        
         try
         {
 	        String strEncodeUrl = daumRequest.getRegUrl();
