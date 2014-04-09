@@ -1,22 +1,15 @@
 package com.ganzi.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import com.ganzi.common.NaverRequestConfig;
+import com.ganzi.common.RequestConfig;
+import com.ganzi.model.DaumRequest;
 import com.ganzi.model.NaverRequest;
 import com.ganzi.service.HttpNetworkService;
 import com.ganzi.service.XpathService;
@@ -44,35 +37,61 @@ public class HttpNetworkController {
 	 * @when   2014.3.25
 	 */
 	@RequestMapping("/request")
-	public String request(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String request(HttpServletRequest request, HttpServletResponse response) {
 		String strRslt = "";
 		HttpNetworkService httpNetwork = new HttpNetworkService();
 		XpathService xpathService = new XpathService();
 		
 		try {
-			//Naver request를 위한 config bean을 등록 및 사용
-			ApplicationContext context = new AnnotationConfigApplicationContext(NaverRequestConfig.class);
-			NaverRequest naverRequest = (NaverRequest) context.getBean("naverRequest");
-			
+
 			//검색어 set
+			String searchSite = request.getParameter("searchSite");
 			String searchKey = request.getParameter("searchKey");
-			String searchTarget = request.getParameter("searchTarget");
+			String searchTarget = null;
+			String xml = null;
+			ApplicationContext context = new AnnotationConfigApplicationContext(RequestConfig.class);
 			
-			naverRequest.setQuery(searchKey);
-			naverRequest.setTarget(searchTarget);
+			if (searchSite.equals("naver"))
+			{
+				searchTarget = request.getParameter("searchTargetNaver");
+				String searchSort = request.getParameter("searchSortNaver");
 			
-			//request
-			String xml = (String) httpNetwork.strGetData(naverRequest);
+				//Naver request를 위한 config bean을 등록 및 사용
+				NaverRequest naverRequest = (NaverRequest) context.getBean("naverRequest");
+				
+				naverRequest.setQuery(searchKey);
+				naverRequest.setTarget(searchTarget);
+				naverRequest.setSort(searchSort);
+				
+				//request
+				xml = (String) httpNetwork.strGetDataNaver(naverRequest);
+			}
+			else if (searchSite.equals("daum"))
+			{
+				searchTarget = request.getParameter("searchTargetDaum");
+				
+				//daum request를 위한 config bean을 등록 및 사용
+				DaumRequest daumRequest = (DaumRequest) context.getBean("daumRequest");
+				
+				daumRequest.setQ(searchKey);
+				daumRequest.setTarget(searchTarget);
+				
+				//request
+				xml = (String) httpNetwork.strGetDataDaum(daumRequest);
+			}
 			
 			//xPath를 이용하여 파싱
 			strRslt = xpathService.XpathParsing(xml);
 			
 			request.setAttribute("strRslt", strRslt);
+			request.setAttribute("searchKey", searchKey);
+			request.setAttribute("searchTarget", searchTarget);
+			request.setAttribute("searchSite", searchSite);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "socket/request"; 
+		return "socket/search"; 
 	}
 	
 	/**
