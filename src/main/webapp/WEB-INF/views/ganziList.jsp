@@ -20,6 +20,7 @@
 </head>
 <body>
 <table border="1" summary="회원 전체목록">
+		<div><a href="<c:url value="/logout.do" />">로그아웃</a></div>
 		<caption> = 회원정보 = </caption>
 		<colgroup>
 			<col width="100" />

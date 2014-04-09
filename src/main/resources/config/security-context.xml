@@ -6,8 +6,8 @@
                     http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
-	<!-- We will be defining all security related configurations in this file -->
-
+	<!-- We will be defining all security related configurations in this file -->	
+	
 	<http auto-config="true">
 		<intercept-url pattern="/list.do"
 			access="ROLE_USER,ROLE_ADMIN" />
@@ -15,22 +15,16 @@
 			access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/update.do" access="ROLE_ADMIN" />
 		<intercept-url pattern="/deleteProc.do" access="ROLE_ADMIN" />
-		<form-login login-page="/login.do" default-target-url="/list.do"
-			authentication-failure-url="/login.do" />
+		<form-login login-page="/login.do" 
+			authentication-failure-handler-ref="LoginFailureHandler"
+			authentication-success-handler-ref="LoginSuccessHandler" />
 		<logout invalidate-session="true" logout-url="/logout.do"
 			logout-success-url="/login.do" /> <!-- the logout url we will use in JSP -->
 	</http>
 
 	<authentication-manager>
-		<authentication-provider>
-			<!-- <user-service>
-				<user name="mankeys" password="1234" authorities="ROLE_ADMIN" />
-				<user name="cat" password="12345678" authorities="ROLE_USER" />
-			</user-service> -->
-			<jdbc-user-service id="userService"
-				data-source-ref="dataSource"
-				users-by-username-query="select userid as username, userpwd as password, true as enabled from ganzi_user where userid = ?"
-				authorities-by-username-query="select userid as username, userrole as authority from ganzi_user where userid = ?" />
+		<authentication-provider user-service-ref="userDetailsService">	
+			<password-encoder ref="passwordEncoder"/>
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>
