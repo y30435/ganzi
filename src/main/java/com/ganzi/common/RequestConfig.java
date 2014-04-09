@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import com.ganzi.model.DaumRequest;
 import com.ganzi.model.NaverRequest;
 
 /**
@@ -17,8 +18,8 @@ import com.ganzi.model.NaverRequest;
  */
 
 @Configuration
-@PropertySource("classpath:/config/naver.openapi.properties")
-public class NaverRequestConfig {
+@PropertySource("classpath:/config/search.openapi.properties")
+public class RequestConfig {
 	@Autowired
     Environment env;
 	
@@ -28,13 +29,22 @@ public class NaverRequestConfig {
 		NaverRequest naverRequest = new NaverRequest();
 		
 		naverRequest.setRegUrl(env.getProperty("naver.openapi.url"));
-		naverRequest.setRegKey(env.getProperty("naver.openapi.key"));
-		naverRequest.setTarget(env.getProperty("naver.openapi.target"));
-		naverRequest.setQuery(env.getProperty("naver.openapi.query"));
+		naverRequest.setKey(env.getProperty("naver.openapi.key"));
 		naverRequest.setDisplay(env.getProperty("naver.openapi.display"));
 		naverRequest.setStart(env.getProperty("naver.openapi.start"));
-		naverRequest.setSort(env.getProperty("naver.openapi.sort"));
 		
 		return naverRequest;
+	}
+	
+	@Bean(name="daumRequest")
+	public DaumRequest DaumRequest() {
+		
+		DaumRequest daumRequest = new DaumRequest();
+		// http://apis.daum.net/search/blog?apikey=[사용자 api키]&q='
+		daumRequest.setRegUrl(env.getProperty("daum.openapi.url"));
+		daumRequest.setApkey(env.getProperty("daum.openapi.apikey"));
+		daumRequest.setResult(env.getProperty("daum.openapi.result"));
+		
+		return daumRequest;
 	}
 }

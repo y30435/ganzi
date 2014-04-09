@@ -8,21 +8,21 @@ package com.ganzi.model;
  */
 
 public class NaverRequest {
-	
-	private String regKey;
+
 	private String regUrl;
-	private String target;
+	private String key;
 	private String query;
+	private String target;
 	private String display;
 	private String start;
 	private String sort;
 
-	public String getRegKey() {
-		return regKey;
+	public String getKey() {
+		return key;
 	}
 
-	public void setRegKey(String regKey) {
-		this.regKey = regKey;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public String getRegUrl() {
