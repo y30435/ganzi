@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,7 +75,6 @@ public class MemberAdminController {
 	 */
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
-
 		
 		return "gaziLogin"; 
 	}
@@ -181,6 +181,7 @@ public class MemberAdminController {
 	@RequestMapping("/joinProc")
 	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
+		ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
 		int result = 0;
 		try {
 			String userid = request.getParameter("userid");
@@ -188,8 +189,10 @@ public class MemberAdminController {
 			String userrole = "ROLE_USER";
 			String username = request.getParameter("username");
 			
+			String huserpwd =encoder.encodePassword(userpwd, null);
+			
 			ganziUserDto.setUserid(userid);
-			ganziUserDto.setUserpwd(userpwd);
+			ganziUserDto.setUserpwd(huserpwd);
 			ganziUserDto.setUserrole(userrole);
 			ganziUserDto.setUsername(username);
 			
