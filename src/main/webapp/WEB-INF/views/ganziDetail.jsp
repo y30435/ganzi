@@ -15,6 +15,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Ganzi Project</title>
+<script language="javascript" src="/ganzi/js/jquery-1.11.0.js" ></script>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
 <security:authentication property="authorities" var="usr_authority"></security:authentication>
 </head>

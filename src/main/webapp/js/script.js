@@ -1,191 +1,114 @@
-/**
- * 
- */
-var regx_id =/^[a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(?:\.[a-zA-Z]{2})?$/;   
-var regx_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}$/;
-var regx_name = /^[가-힣a-zA-Z]+$/;
-/* var regx = /^[a-zA-Z]{4}+\_[a-zA-Z]$/;*/
-
-function loginChk(){
-	
-	var id = document.getElementsByName("j_username")[0].value;
-	var pwd = document.getElementsByName("j_password")[0].value; 
-
-	/* 
-	 * 아이디는 이메일 형식만 입력 
+$(document).ready(function(){
+	/**
+	 * check to input box - login page 
 	 */
-	if((id.length) == 0 || (id == null)){
-		alert("아이디를 입력하세요.");
-		document.getElementsByName("j_username")[0].value="";
-		document.getElementsByName("j_username")[0].focus();
-		return false;
-	}else if(!regx_id.test(id)){
-		alert("아이디는 이메일 형식으로 입력하세요.");
-		document.getElementsByName("j_username")[0].value="";
-		document.getElementsByName("j_username")[0].focus();
-		return false;
-	}
-	
-	/* 
-	 * 패스워드는 영문/숫자/특수문자 포함
-	 * 6 ~ 12자리 이내 입력 
-	 */
-	if((pwd.length) == 0 || (pwd == null)){
-		alert("비밀번호를 입력하세요.");
-		document.getElementsByName("j_password")[0].value="";
-		document.getElementsByName("j_password")[0].focus();
-		return false;
-	}else if((pwd.length) < 6 || (pwd.length) > 12){
-		alert("비밀번호는 6 ~ 12자리로 입력하세요.");
-		document.getElementsByName("j_password")[0].value="";
-		document.getElementsByName("j_password")[0].focus();
-		return false;
-	}else if(!regx_pwd.test(pwd)){
-		alert("비밀번호는 문자,숫자,특수문자의 조합으로 입력하세요.");
-		document.getElementsByName("j_password")[0].value="";
-		document.getElementsByName("j_password")[0].focus();
-		return false;
-	}
-	document.getElementById("loginform").submit();
-}
+	$('#loginform').submit(function(){
+		var regx_id =/^[a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(?:\.[a-zA-Z]{2})?$/;   
+		var regx_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}$/;
+		var $id = $('.loginid');
+		var $pwd = $('.loginpwd');
+		
+		if($id.val()=='' || $pwd.val()==''){
+			alert("빈칸을 확인해 주세요.");
+			if($id.val()==''){
+				$id.focus();
+			}else{
+				$pwd.focus();
+			}
+			return false;
+		}
+		
+		if(!regx_id.test($id.val())){
+			alert("이메일 주소 형식이 올바르지 않습니다.");
+			$id.val('');
+			$id.focus();
+			return false;
+		}
+		
+		if(!regx_pwd.test($pwd.val()) || ($pwd.val().length<6 || $pwd.val().length>12) ){
+			if(!regx_pwd.test($pwd.val())){
+				alert("비밀번호 입력 형식이 올바르지 않습니다.(패스워드는 영문/숫자/특수문자 포함되어야 함.)");
+			}else{
+				alert("비밀번호는 6 ~ 12자리 이내로 입력하세요.");
+			}	
+			$pwd.val('');
+			$pwd.focus();
+			return false;
+		}
+	});
+});
 
-function joinChk(){
-	
-	var name = document.getElementsByName("username")[0].value;
-	var id = document.getElementsByName("userid")[0].value;
-	var pwd = document.getElementsByName("userpwd")[0].value; 
-	var pwd2 = document.getElementsByName("userpwd")[1].value;
-	
+$(document).ready(function(){
+	/**
+	 * check to authentication - update page
+	 */
+	if($(".userrole").val() == "ROLE_ADMIN"){
+		$("#slt option:eq(1)").attr("selected","selected");
+	}
+});
+
+$(document).ready(function(){
+	/**
+	 * collect to password form - join page
+	 */
+	$("#joinform").submit(function(){
+		var regx_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}$/;
+		$pwd1=$('.joinpwd1');
+		$pwd2=$('.joinpwd2');
+		
+		if($pwd1.val()=='' || $pwd2.val()==''){
+			alert("빈칸을 확인해 주세요.");
+			if($pwd1.val()==''){
+				$pwd1.focus();
+			}else{
+				$pwd2.focus();
+			}
+			return false;
+		}
+		
+		if(!regx_pwd.test($pwd1.val()) || ($pwd1.val().length<6 || $pwd1.val().length>12) ){
+			if(!regx_pwd.test($pwd1.val())){
+				alert("비밀번호 입력 형식이 올바르지 않습니다.(패스워드는 영문/숫자/특수문자 포함되어야 함.)");
+			}else{
+				alert("비밀번호는 6 ~ 12자리 이내로 입력하세요.");
+			}	
+			$pwd1.val('');
+			$pwd2.val('');
+			$pwd1.focus();
+			return false;
+		}
+		
+		if($pwd1.val() != $pwd2.val()){
+			alert("입력한 비밀번호가 일치하지 않습니다.");
+			$pwd1.val('');
+			$pwd2.val('');
+			$pwd1.focus();
+			return false;
+		}
+	});	
+});
+// var regx_id =/^[a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}(?:\.[a-zA-Z]{2})?$/;   
+// var regx_pwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,12}$/;
+// var regx_name = /^[가-힣a-zA-Z]+$/;
+
+
 	/* 
 	 * 이름은 한글/영문만 입력
 	 */
-	if((name.length) == 0 || (name == null)){
-		alert("이름을 입력하세요.");
-		document.getElementsByName("username")[0].value="";
-		document.getElementsByName("username")[0].focus();
-		return false;
-	}else if(!regx_name.test(name)){
-		alert("이름은 한글,영문으로 입력하세요.");
-		document.getElementsByName("username")[0].value="";
-		document.getElementsByName("username")[0].focus();
-		return false;
-	}
+
 	
 	/* 
 	 * 아이디는 이메일 형식만 입력
 	 */
-	if((id.length) == 0 || (id == null)){
-		alert("아이디를 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
-		return false;
-	}else if(!regx_id.test(id)){
-		alert("아이디는 이메일 형식으로 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
-		return false;
-	}
+
 	
 	/* 
 	 * 패스워드는 영문/숫자/특수문자 포함
 	 * 6 ~ 12자리 이내 입력
 	 * pwd 
 	 */
-	if((pwd.length) == 0 || (pwd == null)){
-		alert("비밀번호를 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if((pwd.length) < 6 || (pwd.length) > 12){
-		alert("비밀번호는 6 ~ 12자리로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if(!regx_pwd.test(pwd)){
-		alert("비밀번호는 문자,숫자,특수문자의 조합으로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if(pwd != pwd2){
-		alert("입력된 비밀번호가 같지 않습니다.")
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}
-	document.getElementById("joinform").submit();
-}
 
-function updateChk(){
-	
-	var name = document.getElementsByName("username")[0].value;
-	var id = document.getElementsByName("userid")[0].value;
-	var pwd = document.getElementsByName("userpwd")[0].value; 
-	var pwd2 = document.getElementsByName("userpwd")[1].value;
-	/* var role = document.getElementsByName("userrole")[0].value; */
-	
 	/* 
-	 * 이름은 한글/영문만 입력
-	 */
-	if((name.length) == 0 || (name == null)){
-		alert("이름을 입력하세요.");
-		document.getElementsByName("username")[0].value="";
-		document.getElementsByName("username")[0].focus();
-		return false;
-	}
-	
-	/* 
-	 * 아이디는 이메일 형식만 입력
-	 */
-	if((id.length) == 0 || (id == null)){
-		alert("아이디를 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
-		return false;
-	}else if(!regx_id.test(id)){
-		alert("아이디는 이메일 형식으로 입력하세요.");
-		document.getElementsByName("userid")[0].value="";
-		document.getElementsByName("userid")[0].focus();
-		return false;
-	}
-	
-	/* 
-	 * 패스워드는 영문/숫자/특수문자 포함
-	 * 6 ~ 12자리 이내 입력
+	 * 패스워드 일치 여부 확인
 	 * pwd 
 	 */
-	if((pwd.length) == 0 || (pwd == null)){
-		alert("비밀번호를 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if((pwd.length) < 6 || (pwd.length) > 12){
-		alert("비밀번호는 6 ~ 12자리로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if(!regx_pwd.test(pwd)){
-		alert("비밀번호는 문자,숫자,특수문자의 조합으로 입력하세요.");
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}else if(pwd != pwd2){
-		alert("입력된 비밀번호가 같지 않습니다.")
-		document.getElementsByName("userpwd")[0].value="";
-		document.getElementsByName("userpwd")[1].value="";
-		document.getElementsByName("userpwd")[0].focus();
-		return false;
-	}
-	
-	/* 
-	 * 권한은 영문만 입력
-	 */
-
-	document.getElementById("updateform").submit();
-}

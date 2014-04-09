@@ -37,50 +37,15 @@ public class HttpNetworkService {
         {
         	//TODO url 파라미터 이름을 정의 하는 좋은 방법 없을까?
             String strEncodeUrl = naverRequest.getRegUrl();
-            
-//            Properties pro = new Properties();
-//            FileInputStream fis = new FileInputStream("classpath:/config/naver.openapi.properties");
-//            
-//            pro.load(fis);
-//            String param = pro.getProperty("param");
-//            Method[] m = naverRequest.getClass().getMethods();
-//            for(Method temp : m){
-//            	if(temp.getName().startsWith("get")){
-//            		strEncodeUrl += "?"+temp.getName()+"=" + temp.invoke(naverRequest);
-//            	}
-//            	
-//            }
-
-            Field[] f = naverRequest.getClass().getDeclaredFields();
-            int index = 0;
-            for(Field temp : f){
-//            	System.out.println(temp.getName());
-//            	temp.getName();
-//            	
-            	String fname = temp.getName();
-            	if(!fname.equals("getRegUrl")){
-	            	Method m = naverRequest.getClass().getMethod("get"+fname.substring(0,1).toUpperCase()+temp.getName().substring(1, temp.getName().length()));
-	            	strEncodeUrl += (index++ == 0 ? "?" : "&") + fname + "=" + m.invoke(naverRequest);
-            	}
-            	
-            }
-            
-//            strEncodeUrl += "?key=" + naverRequest.getKey();
-//            strEncodeUrl += "&query=" + naverRequest.getQuery();
-//            strEncodeUrl += "&target=" + naverRequest.getTarget();
-//            strEncodeUrl += "&display=" + naverRequest.getDisplay();
-//            strEncodeUrl += "&start=" + naverRequest.getStart();
-//            strEncodeUrl += "&sort=" + naverRequest.getSort();
-            
-            
-            
-            
-            
-            
+            strEncodeUrl += "?key=" + naverRequest.getKey();
+            strEncodeUrl += "&target=" + naverRequest.getTarget();
+            strEncodeUrl += "&query=" + naverRequest.getQuery();
+            strEncodeUrl += "&display=" + naverRequest.getDisplay();
+            strEncodeUrl += "&start=" + naverRequest.getStart();
+            strEncodeUrl += "&sort=" + naverRequest.getSort();
             
             URL oOpenURL = new URL(strEncodeUrl);
-
-	        System.out.println(strEncodeUrl);
+          
             httpConn =  (HttpURLConnection) oOpenURL.openConnection();          
             httpConn.setRequestMethod("POST");          
             httpConn.connect();          

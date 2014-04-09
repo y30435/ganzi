@@ -16,6 +16,14 @@
 	</properties>
 
 	<dependencies>
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+ 
+	
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -163,6 +171,7 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		
 
 	</dependencies>
 	<build>
