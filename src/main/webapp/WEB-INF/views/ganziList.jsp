@@ -15,6 +15,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Ganzi Project</title>
+<script language="javascript" src="/ganzi/js/jquery-1.11.0.js" ></script>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
 
 </head>
@@ -29,7 +30,7 @@
 		<thead>
 			<tr>
 				<th>NO.</th>
-				<th>아이디</th>
+				<th>ID(email)</th>
 			</tr>
 		</thead>
 		<tbody>
