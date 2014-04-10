@@ -88,12 +88,52 @@ public class MemberAdminController {
 	 * @author 
 	 * @when 
 	 */
-	@RequestMapping(value="/join",method=RequestMethod.GET)
+	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public String join(ModelMap model) {
-		model.addAttribute("GanziUserDto", new GanziUserDto());
+		model.addAttribute("ganziUserDto", new GanziUserDto());
+		System.out.println("get");
 		return "ganziJoin"; 
 	}
 	
+	@RequestMapping(value="/joinPro", method=RequestMethod.POST)
+	public String joinProc(@Valid GanziUserDto ganziUserDto, BindingResult rst, ModelMap model) {
+		GanziUserDto user = new GanziUserDto();
+		int result = 0;
+		String url = "ganziJoin";
+		
+		if (rst.hasErrors()) {
+			System.out.println(rst.getAllErrors());
+		} else {
+
+			try {
+				String new_pwd = convertPassword(ganziUserDto.getUserpwd());
+				String userrole = "ROLE_USER";
+								
+				user.setUserid(ganziUserDto.getUserid());
+				user.setUserpwd(new_pwd);
+				user.setUserrole(userrole);
+				user.setUsername(ganziUserDto.getUsername());
+				
+				result = ganziUserService.join(user);
+				
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			if (result == 1){
+				url = "redirect:/list.do";
+			} 
+
+		}
+		return url;
+	}
+	
+	public String convertPassword(String pwd){
+		ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
+		String result = encoder.encodePassword(pwd, null);
+		
+		return result;
+	}
 	
 	/**
 	 * 회원 정보 수정 페이지
@@ -183,13 +223,15 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/joinProc")
-	public ModelAndView proc(@Valid GanziUserDto ganziuser, BindingResult rst) {
+	public ModelAndView proc(@Valid GanziUserDto ganziuser, BindingResult rst, ModelMap model) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
 		int result = 0;
 		String url = "redirect:/join.do";
 		
 		if(rst.hasErrors()){
+			System.out.println("valid errors");
+			model.addAttribute(ganziuser);
 			return new ModelAndView(url);
 		}
 		
@@ -199,6 +241,7 @@ public class MemberAdminController {
 			//String userrole = "ROLE_USER";
 			//String username = request.getParameter("username");
 			
+			System.out.println("pass");
 			String userid = ganziuser.getUserid();
 			String userpwd = ganziuser.getUserpwd();
 			String userrole = "ROLE_USER";

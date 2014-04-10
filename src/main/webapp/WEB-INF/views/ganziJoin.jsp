@@ -18,8 +18,7 @@
 
 </head>
 <body onload='document.getElementsByName("username")[0].focus()'>
-<sf:form id='joinform' action="/ganzi/joinProc.do" method='POST' commandName="GanziUserDto">
-	<sf:errors path="*" element="div" />
+<sf:form id='joinform' action="/ganzi/joinPro.do" method='POST' commandName="ganziUserDto">
  		<table>
  		 	<tr bgcolor="skyblue">
  		 		<td/>
@@ -27,15 +26,15 @@
  			</tr>
  			<tr>
 				<td>이름:</td>
-				<td><input type="text" size="50" name='username' /><sf:errors path="username" style="color:red;"/></td>
+				<td><input type="text" size="50" name='username' value="${username}" /><sf:errors path="username" style="color:red" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>ID(email):</td>
-				<td><input type="text" size="50" name='userid' /><sf:errors path="userid" style="color:red;"/></td>
+				<td><input type="text" size="50" name='userid' value="${userid}"/><sf:errors path="userid" style="color:red" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호:</td>
-				<td><input type="password" size="50" name='userpwd' class="joinpwd1"/><sf:errors path="userpwd" style="color:red;"/></td>
+				<td><input type="password" size="50" name='userpwd' class="joinpwd1"/><sf:errors path="userpwd" style="color:red" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인:</td>

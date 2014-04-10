@@ -19,14 +19,6 @@ public class GanziUserDto {
 	@Size(min=2, max=10)
 	@Pattern(regexp="^[가-힣a-zA-Z]+$")
 	private String username;
-	
-	public GanziUserDto(){}
-	
-	public GanziUserDto(String userid, String userpwd, String username){
-		this.userid = userid;
-		this.userpwd = userpwd;
-		this.username = username;
-	}
 
 	public String getUserid() {
 		return userid;
