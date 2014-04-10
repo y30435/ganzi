@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,7 +79,6 @@ public class MemberAdminController {
 	 */
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
-		
 		return "gaziLogin"; 
 	}
 	
@@ -85,8 +88,9 @@ public class MemberAdminController {
 	 * @author 
 	 * @when 
 	 */
-	@RequestMapping("/join")
-	public String join(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/join",method=RequestMethod.GET)
+	public String join(ModelMap model) {
+		model.addAttribute("GanziUserDto", new GanziUserDto());
 		return "ganziJoin"; 
 	}
 	
@@ -179,15 +183,26 @@ public class MemberAdminController {
 	 * @when 
 	 */
 	@RequestMapping("/joinProc")
-	public ModelAndView proc(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView proc(@Valid GanziUserDto ganziuser, BindingResult rst) {
 		GanziUserDto ganziUserDto = new GanziUserDto();
 		ShaPasswordEncoder encoder=new ShaPasswordEncoder(256);
 		int result = 0;
+		String url = "redirect:/join.do";
+		
+		if(rst.hasErrors()){
+			return new ModelAndView(url);
+		}
+		
 		try {
-			String userid = request.getParameter("userid");
-			String userpwd = request.getParameter("userpwd");
+			//String userid = request.getParameter("userid");
+			//String userpwd = request.getParameter("userpwd");
+			//String userrole = "ROLE_USER";
+			//String username = request.getParameter("username");
+			
+			String userid = ganziuser.getUserid();
+			String userpwd = ganziuser.getUserpwd();
 			String userrole = "ROLE_USER";
-			String username = request.getParameter("username");
+			String username = ganziuser.getUsername();
 			
 			String huserpwd =encoder.encodePassword(userpwd, null);
 			
@@ -202,7 +217,7 @@ public class MemberAdminController {
 			e.printStackTrace();
 		}
 		
-		String url = "redirect:/join.do";
+		//String url = "redirect:/join.do";
 		if (result == 1){
 			url = "redirect:/list.do";
 		} 

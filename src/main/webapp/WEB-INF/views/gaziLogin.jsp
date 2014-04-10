@@ -13,6 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ganzi Project</title>
+<script language="javascript" src="/ganzi/js/jquery-1.11.0.js" ></script>
 <script language="javascript" src="/ganzi/js/script.js" ></script>
 
 </head>
@@ -45,10 +46,8 @@
 				<td><input type='password' size="50" name='j_password' class="loginpwd"/></td>
 			</tr>
 			<tr>
-				<td colspan='50'><input type="button" value="login" onclick="loginChk();" /></td>
-			</tr>
-			<tr>
-				<td colspan='50'><a href="<c:url value="/join.do" />"><input type="button" value="회원가입" /></a></td>
+				<td align='center' colspan='50'><input type="submit" value="login" class="loginchk" />
+				<a href="<c:url value="/join.do" />"><input type="button" value="회원가입" /></a></td>
 			</tr>
 		</table>
  </form>

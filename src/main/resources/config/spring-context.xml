@@ -26,11 +26,11 @@
     <!-- Spring3 Validator 처리 -->
     <mvc:annotation-driven />
    
-    <!-- Register the messages_ko.properties -->
-    <bean id="messageSource"
-        class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="classpath:config/messages_ko.properties" />
-    </bean>
+	<!-- bind your messages.properties -->
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="classpath:config/messages.properties" />
+	</bean>
 	
 	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -39,7 +39,7 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/views/"
 		p:suffix=".jsp"/>
-	
+		
 	<!-- To prevent browser's back button on displaying secured resource after logout -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="cacheSeconds" value="0" />
