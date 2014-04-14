@@ -48,3 +48,4 @@ public class RequestConfig {
 		return daumRequest;
 	}
 }
+
