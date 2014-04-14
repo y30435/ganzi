@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ganzi.dto.GanziUserDto;
 import com.ganzi.service.GanziUserService;
 
+// 수정 테스트 
 @Controller
 public class MemberAdminController {
 	@Autowired
