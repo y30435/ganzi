@@ -86,7 +86,14 @@ public class XpathService {
 				strRslt += "<span class='el_text'><a href='"+ itemChild.item($j).getTextContent() + "' target='_blank'>"+ itemChild.item($j).getTextContent() + "</a></span>";
 				strRslt += "</span>";
 			}
-			else
+			else if(itemChild.item($j).getNodeName().equals("thumbnail"))
+            {
+                strRslt += "<span class='element'>";
+                strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
+                strRslt += "<span class='el_text'><image src='"+ itemChild.item($j).getTextContent() + "'></span>";
+                strRslt += "</span>";
+            }
+            else
 			{
 				strRslt += "<span class='element'>";
 				strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
