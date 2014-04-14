@@ -36,7 +36,6 @@ public class RequestConfig {
 		return naverRequest;
 	}
 	
-	
 	@Bean(name="daumRequest")
 	public DaumRequest DaumRequest() {
 		
@@ -49,3 +48,4 @@ public class RequestConfig {
 		return daumRequest;
 	}
 }
+
