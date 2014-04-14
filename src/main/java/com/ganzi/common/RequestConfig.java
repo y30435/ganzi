@@ -15,6 +15,8 @@ import com.ganzi.model.NaverRequest;
  * 
  * @author 개발지원 2팀 - 한주희 과장 
  * @when   2014.3.25
+ * 아무거나 수정 ㅎㅎㅎ
+ * 저도 수정 ! 
  */
 
 @Configuration
