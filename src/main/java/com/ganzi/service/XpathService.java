@@ -60,6 +60,7 @@ public class XpathService {
 	private static String XpathParsingDetail(String expression, Document xmlDocument) throws Exception {
 		
 		String strRslt = "";
+        String contentsRslt = "";
 		
 		XPath xPath =  XPathFactory.newInstance().newXPath();
 		NodeList itemList = (NodeList) xPath.evaluate(expression, xmlDocument, XPathConstants.NODESET);
@@ -68,7 +69,7 @@ public class XpathService {
 			for(int $i=0; $i<itemList.getLength(); $i++) {
 				NodeList itemChild = itemList.item($i).getChildNodes();
 				
-				strRslt = setTag(strRslt, itemChild);
+				strRslt = setTag(strRslt, contentsRslt, itemChild);
 			}
 		}
 		
@@ -76,32 +77,32 @@ public class XpathService {
 	}
 
 
-	private static String setTag(String strRslt, NodeList itemChild) {
+	private static String setTag(String strRslt, String contentsRslt, NodeList itemChild) {
 		strRslt += "<div class='item'>";
 		for(int $j=0; $j<itemChild.getLength(); $j++) {
-			if(itemChild.item($j).getNodeName().equals("link"))
-			{
-				strRslt += "<span class='element'>";
-				strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
-				strRslt += "<span class='el_text'><a href='"+ itemChild.item($j).getTextContent() + "' target='_blank'>"+ itemChild.item($j).getTextContent() + "</a></span>";
-				strRslt += "</span>";
-			}
-			else if(itemChild.item($j).getNodeName().equals("thumbnail"))
-            {
-                strRslt += "<span class='element'>";
-                strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
-                strRslt += "<span class='el_text'><image src='"+ itemChild.item($j).getTextContent() + "'></span>";
-                strRslt += "</span>";
-            }
-            else
-			{
-				strRslt += "<span class='element'>";
-				strRslt += "<span class='el_name'>" + itemChild.item($j).getNodeName() + "</span>";
-				strRslt += "<span class='el_text'>"+ itemChild.item($j).getTextContent() + "</span>";
-				strRslt += "</span>";
-			}
+		    String title = itemChild.item($j).getNodeName();
+		    String contents = itemChild.item($j).getTextContent();
+		    
+		    contentsRslt = setContents(contentsRslt, title, contents);
 		}
+		strRslt += contentsRslt;
 		strRslt += "</div>";
 		return strRslt;
 	}
+
+
+    private static String setContents(String contentsRslt, String title, String contents) {
+        contentsRslt += "<span class='element'>";
+        contentsRslt += "<span class='el_name'>" + title + "</span>";
+        
+        if(title.equals("link"))
+            contentsRslt += "<span class='el_text'><a href='"+ contents + "' target='_blank'>"+ contents + "</a></span>";
+        else if(title.equals("thumbnail"))
+            contentsRslt += "<span class='el_text'><image src='"+ contents + "'></span>";
+        else
+            contentsRslt += "<span class='el_text'>"+ contents + "</span>";
+        
+        contentsRslt += "</span>";
+        return contentsRslt;
+    }
 }
