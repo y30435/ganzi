@@ -17,6 +17,7 @@ import com.ganzi.model.NaverRequest;
  * @when   2014.3.25
  * 아무거나 수정 ㅎㅎㅎ
  * 저도 수정 ! 
+ * 2차 수정 !
  */
 
 @Configuration
