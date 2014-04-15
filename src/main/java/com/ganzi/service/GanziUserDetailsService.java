@@ -45,7 +45,7 @@ public class GanziUserDetailsService implements UserDetailsService{
 			
 		} catch (Exception e) {
 			//TODO db exception 발생시 예외 처리
-			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
+			//System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
 			e.printStackTrace();
 		}
 		
